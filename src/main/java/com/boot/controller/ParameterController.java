@@ -102,4 +102,10 @@ public class ParameterController {
         return person;
     }
 
+    @ResponseBody
+    @GetMapping("/test/git")
+    public void test_git(){
+        System.out.println("test_git");
+    }
+
 }
