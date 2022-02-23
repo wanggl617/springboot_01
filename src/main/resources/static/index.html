@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+这是一个欢迎页
+<form action="/user" method="get">
+    <input value="GET" type="submit"/>
+</form>
+<form action="/user" method="post">
+    <input value="POST" type="submit"/>
+</form>
+<form action="/user" method="post">
+    <input type="hidden" name="_method" value="DELETE">
+    <input value="DELETE" type="submit"/>
+</form>
+<form action="/user" method="post">
+    <input type="hidden" name="_method" value="PUT">
+    <input value="PUT" type="submit"/>
+</form>
+
+<form action="/saveUser" method="post">
+    <div>
+        <span>username:</span> <input type="text" name="userName" value="wangguolin" />
+    </div>
+    <div>
+        <span>age:</span> <input type="text" name="age" value="18" />
+    </div>
+    <div>
+        <span>birthday:</span> <input type="text" name="birth"  value="2021/12/02"/>
+    </div>
+<!--    级联属性 springBoot 可以 默认可以将其转换为相应的javaBean-->
+
+<!--    <div>-->
+<!--        <span>pet-name:</span> <input type="text" name="pet.name" value="啊猫"/>-->
+<!--    </div>-->
+<!--    <div>-->
+<!--        <span>pet-age:</span> <input type="text" name="pet.age" value="5"  />-->
+<!--    </div>-->
+
+<!--    自定义属性 ，自定义converter 将其转换为 相应的javaBean-->
+    <div>
+        <span>pet:</span><input type="text" name="pet" value="猫,10">
+    </div>
+
+    <div>
+        <input type="submit" value="submit" />
+    </div>
+</form>
+</body>
+</html>
