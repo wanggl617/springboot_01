@@ -19,32 +19,34 @@ import org.springframework.web.bind.annotation.*;
 public class HelloController {
     @Autowired
     Car car;
+
     @RequestMapping("/car")
-    public Car hand02(){
+    public Car hand02() {
         return car;
     }
+
     //@RequestMapping(value = "/user",method = RequestMethod.GET)
     @GetMapping("/user")
-    public String getUser(){
+    public String getUser() {
         return "GET-张三";
     }
 
     //@RequestMapping(value = "/user",method = RequestMethod.POST)
     @PostMapping("/user")
-    public String saveUser(){
+    public String saveUser() {
         return "POST-张三";
     }
 
 
-   // @RequestMapping(value = "/user",method = RequestMethod.PUT)
+    // @RequestMapping(value = "/user",method = RequestMethod.PUT)
     @PutMapping("/user")
-    public String putUser(){
+    public String putUser() {
         return "PUT-张三";
     }
 
     //@RequestMapping(value = "/user",method = RequestMethod.DELETE)
     @DeleteMapping("/user")
-    public String deleteUser(){
+    public String deleteUser() {
         return "DELETE-张三";
     }
 }

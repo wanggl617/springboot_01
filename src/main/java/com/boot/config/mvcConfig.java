@@ -19,7 +19,7 @@ import org.springframework.web.util.UrlPathHelper;
  * @data 2021/11/26
  */
 @Configuration(proxyBeanMethods = false)
-public class mvcConfig  implements WebMvcConfigurer{
+public class mvcConfig implements WebMvcConfigurer {
     @Override
     public void configurePathMatch(PathMatchConfigurer configurer) {
         UrlPathHelper urlPathHelper = new UrlPathHelper();

@@ -29,71 +29,73 @@ import java.util.Map;
 //@RestController
 public class ParameterController {
     @RequestMapping("/{id}/{username}")
-    public Map<String,Object> test_1(@PathVariable("id") int id, @PathVariable("username") String username,
-                                     @PathVariable Map<String,String> paraMap,
-                                     @RequestHeader("User-Agent") String userAgent,
-                                     @RequestHeader Map<String,String> header){
-        Map<String,Object> map = new HashMap<>();
-        map.put("id",id);
-        map.put("username",username);
-        map.put("parameters",paraMap);
-        map.put("User-Agent",userAgent);
-        map.put("header",header);
+    public Map<String, Object> test_1(@PathVariable("id") int id, @PathVariable("username") String username,
+                                      @PathVariable Map<String, String> paraMap,
+                                      @RequestHeader("User-Agent") String userAgent,
+                                      @RequestHeader Map<String, String> header) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("id", id);
+        map.put("username", username);
+        map.put("parameters", paraMap);
+        map.put("User-Agent", userAgent);
+        map.put("header", header);
         return map;
     }
 
     @PostMapping("/value")
-    public Map<String,Object> test_2(@RequestBody String content){
-        Map<String,Object> map = new HashMap<>();
-        map.put("body",content);
+    public Map<String, Object> test_2(@RequestBody String content) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("body", content);
         return map;
     }
 
     @GetMapping("/user/{user}")
-    public Map<String,Object> test_3(@PathVariable("user") String path,
-                                     @MatrixVariable("id") Integer id,
-                                     @MatrixVariable("username") List<String> username){
-        Map<String,Object> map = new HashMap<>();
-        map.put("path",path);
-        map.put("id",id);
-        map.put("userList",username);
+    public Map<String, Object> test_3(@PathVariable("user") String path,
+                                      @MatrixVariable("id") Integer id,
+                                      @MatrixVariable("username") List<String> username) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("path", path);
+        map.put("id", id);
+        map.put("userList", username);
         return map;
     }
 
     @GetMapping("/params")
-    public String test_params(Map<String,Object> map,
+    public String test_params(Map<String, Object> map,
                               Model model,
                               HttpServletRequest request,
-                              HttpServletResponse response){
-        map.put("map","map_message");
-        model.addAttribute("model","model_message");
-        request.setAttribute("request","req_message");
-        Cookie cookie = new Cookie("c1","v1");
+                              HttpServletResponse response) {
+        map.put("map", "map_message");
+        model.addAttribute("model", "model_message");
+        request.setAttribute("request", "req_message");
+        Cookie cookie = new Cookie("c1", "v1");
 
         response.addCookie(cookie);
         return "forward:/success";
 
     }
+
     @ResponseBody
     @GetMapping("/success")
-    public Map<String,Object> test_success(@RequestAttribute("request")String req_msg,
-                                           HttpServletRequest request){
-        Map<String,Object> map = new HashMap<>();
-        map.put("request",req_msg);
-        map.put("map_msg",request.getAttribute("map"));
-        map.put("model_msg",request.getAttribute("model"));
+    public Map<String, Object> test_success(@RequestAttribute("request") String req_msg,
+                                            HttpServletRequest request) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("request", req_msg);
+        map.put("map_msg", request.getAttribute("map"));
+        map.put("model_msg", request.getAttribute("model"));
 
         return map;
     }
 
+    @ResponseBody
     @PostMapping("/saveUser")
-    public Person save_user(Person person){
-        return  person;
+    public Person save_user(Person person) {
+        return person;
     }
 
     @ResponseBody
     @GetMapping("/test/person")
-    public Person test_json(){
+    public Person test_json() {
         Person person = new Person();
         person.setAge(28);
         person.setBirth(new Date());
@@ -104,8 +106,20 @@ public class ParameterController {
 
     @ResponseBody
     @GetMapping("/test/git")
-    public void test_git(){
+    public void test_git() {
         System.out.println("test_git");
     }
+
+    /**
+     * 1.浏览器发送请求，直接返回xml,       [application/xml]       jacksonXmlConverter
+     * 2.ajax发送请求，返回json            [application/json]      jacksonJsonConverter
+     * 3.app 发送请求，返回自定义协议数据     [application/x-xx]      xxxxxConverter
+     *               自定义数据格式[属性值1；属性值2]
+     * 步骤：
+     * 1.自定义MessageConverter 添加到系统底层
+     * 2.系统底层会统计出 所有的MessageConverter能操作哪些类型
+     * 3.客户端内容协商
+     */
+
 
 }
